@@ -1,0 +1,111 @@
+@import "compass/css3";
+
+@import url(https://fonts.googleapis.com/css?family=Stint+Ultra+Expanded);
+
+$cup-color: #000000;
+$font-size: 16px;
+
+body {
+  text-align: center;
+}
+
+.coffee {
+  position: relative;
+  display: inline-block;
+  margin: 0 auto;
+  margin-top: 50px;
+  
+  .cup {
+    position: relative;
+    width: 200px;
+    height: 180px;
+    overflow: hidden;
+    border: 8px solid $cup-color;
+    @include border-radius(0px 0px 25px 25px, 0px 0px 25px 25px);
+    display:table-cell; 
+    vertical-align:bottom;
+    font-family: 'Stint Ultra Expanded', cursive;
+    color: #ffffff;
+    
+    div {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      display: table;
+      font-size: 0;
+      
+      @include single-transition(all, 0.5s);
+      
+      span {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        opacity: 0;
+      }
+    }
+    
+    .espresso {       background: #BF6A30;}
+    .milk {           background: #FFBA40;}
+    .foam {           background: #FFCC73;}
+    .water {          background: #00A287;}
+  }
+  
+  .handle {
+    position: absolute;
+    right: -55px;
+    height: 70px;
+    width: 40px;
+    border: 15px solid $cup-color;
+    border-left: none;
+    @include border-radius(0px 50px 50px 0px, 0px 50px 50px 0px);
+  }
+  
+  .saucer {
+    position: absolute;
+    bottom: -30px;
+    left: -50px;
+    width: 280px;
+    height: 0px;
+    border: 15px solid $cup-color;
+    @include border-radius(0px 0px 600px 600px, 0px 0px 300px 300px);
+  }
+  
+  .showItem {
+    font-size: $font-size;
+    span {
+      opacity: 1;
+      @include single-transition(opacity, 0.5s, 0.5s);
+    }
+  }
+  .hideItem {
+    height: 0%;
+    line-height: 0;
+  }
+  
+  &[data-type="americano"] .cup {
+    .espresso {       height: 33%; @extend .showItem; }
+    .water {          height: 67%; @extend .showItem; }
+    .milk {           @extend .hideItem; }
+    .foam {           @extend .hideItem; }
+  }
+  &[data-type="latte"] .cup {
+    .espresso {       height: 33%; @extend .showItem; }
+    .water {          @extend .hideItem; }
+    .milk {           height: 47%; @extend .showItem; }
+    .foam {           height: 20%; @extend .showItem; }
+  }
+  &[data-type="flat-white"] .cup {
+    .espresso {       height: 33%; @extend .showItem; }
+    .water {          @extend .hideItem; }
+    .milk {           height: 47%; @extend .showItem; }
+    .foam {           @extend .hideItem; }
+  }
+  &[data-type="cappuccino"] .cup {
+    .espresso {       height: 33%; @extend .showItem; }
+    .water {          @extend .hideItem; }
+    .milk {           height: 20%; @extend .showItem; }
+    .foam {           height: 47%; @extend .showItem; }
+  }
+}
+
+.btn-group {display:block; margin-top: 50px;}
